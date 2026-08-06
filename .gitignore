@@ -1,0 +1,7 @@
+.serena
+.idea
+gradlew*
+.gradle
+gradle
+players.txt
+build
