@@ -13,9 +13,9 @@ import java.util.Objects;
 public class FileLotteryLoaderTest {
     @Test
     public void parse_lottery_file_successfully() throws URISyntaxException {
-        FileLotteryLoader loader = new FileLotteryLoader(new SimplePickParser());
         Path path = resource("simple_few_lines.txt");
-        Lottery lottery = loader.load(path);
+        FileLotteryLoader loader = new FileLotteryLoader(new SimplePickParser(), path);
+        Lottery lottery = loader.load();
         var result = lottery.getWinnersHistogram(Pick.of(10, 20, 30, 40, 50));
         Assertions.assertEquals(2, result.get2MatchCount());
         Assertions.assertEquals(1, result.get3MatchCount());
@@ -25,9 +25,9 @@ public class FileLotteryLoaderTest {
 
     @Test
     public void lottery_parsing_ignores_broken_lines() throws URISyntaxException {
-        FileLotteryLoader loader = new FileLotteryLoader(new SimplePickParser());
         Path path = resource("some_broken_lines.txt");
-        Lottery lottery = loader.load(path);
+        FileLotteryLoader loader = new FileLotteryLoader(new SimplePickParser(), path);
+        Lottery lottery = loader.load();
         var result = lottery.getWinnersHistogram(Pick.of(10, 20, 30, 40, 50));
         Assertions.assertEquals(2, result.get2MatchCount());
         Assertions.assertEquals(1, result.get3MatchCount());
