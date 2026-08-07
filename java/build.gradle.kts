@@ -47,6 +47,7 @@ tasks.test {
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.13.4"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("com.tngtech.archunit:archunit:1.5.0")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
