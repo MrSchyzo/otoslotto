@@ -7,9 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class FileLotteryLoader {
-    private PickParser parser = new PickParser();
+    private PickParser parser;
 
-    public FileLotteryLoader() {}
+    public FileLotteryLoader(PickParser parser) {
+        this.parser = parser;
+    }
 
     public Lottery load(Path path) {
         var lottery = new Lottery();
