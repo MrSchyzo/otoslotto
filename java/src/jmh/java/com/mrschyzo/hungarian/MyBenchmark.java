@@ -1,6 +1,6 @@
 package com.mrschyzo.hungarian;
 
-import com.mrschyzo.hungarian.domain.Lottery;
+import com.mrschyzo.hungarian.domain.BitmaskLottery;
 import com.mrschyzo.hungarian.domain.Pick;
 import org.openjdk.jmh.annotations.*;
 
@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 @BenchmarkMode(Mode.SampleTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 public class MyBenchmark {
-    private Lottery lottery = new Lottery();
+    private BitmaskLottery lottery = new BitmaskLottery();
     private Pick pick = Pick.of(1, 2, 3, 4, 5);
     private Random random = new Random();
 
@@ -30,7 +30,7 @@ public class MyBenchmark {
     }
 
     @Benchmark
-    public Lottery.Histogram query() {
+    public BitmaskLottery.Histogram query() {
         return lottery.getWinnersHistogram(pick);
     }
 }

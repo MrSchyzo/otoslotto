@@ -1,10 +1,7 @@
 package com.mrschyzo.hungarian.interfaces;
 
 import com.mrschyzo.hungarian.application.service.LotteryAppService;
-import com.mrschyzo.hungarian.domain.Lottery;
-import com.mrschyzo.hungarian.domain.LotteryLoader;
-import com.mrschyzo.hungarian.domain.PickParser;
-import com.mrschyzo.hungarian.domain.SimplePickParser;
+import com.mrschyzo.hungarian.domain.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +20,7 @@ public class IOLotteryControllerTest {
             @Override
             public Lottery load() {
                 loaded.set(true);
-                return new Lottery();
+                return new BitmaskLottery();
             }
         };
         var app = new LotteryAppService(loader, parser);

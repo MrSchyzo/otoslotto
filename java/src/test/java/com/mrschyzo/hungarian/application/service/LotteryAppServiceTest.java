@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class LotteryAppServiceTest {
     private PickParser parser = new SimplePickParser();
-    private LotteryLoader dummyLoader = Lottery::new;
+    private LotteryLoader dummyLoader = BitmaskLottery::new;
 
     @Test
     public void load_service_command_returns_success_if_no_issue_happen() {
@@ -77,7 +77,7 @@ public class LotteryAppServiceTest {
     @Test
     public void query_service_command_returns_correct_histogram() throws ApplicationException {
         LotteryLoader ok = () -> {
-            var lottery = new Lottery();
+            var lottery = new BitmaskLottery();
             lottery.acceptPick(Pick.of(1,2,3,4,5));
             lottery.acceptPick(Pick.of(2,1,3,4,5));
             lottery.acceptPick(Pick.of(1,2,6,4,5));
