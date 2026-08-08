@@ -3,5 +3,5 @@
 gradlew*
 .gradle
 gradle
-players.txt
+java/players.txt
 build

@@ -1,5 +1,10 @@
 package com.mrschyzo.hungarian;
 
+import com.mrschyzo.hungarian.application.service.LotteryAppService;
+import com.mrschyzo.hungarian.domain.SimplePickParser;
+import com.mrschyzo.hungarian.infrastructure.FileLotteryLoader;
+import com.mrschyzo.hungarian.interfaces.IOLotteryController;
+
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
@@ -18,12 +23,22 @@ public class App {
         return a + b;
     }
 
-    static void main(String[] args) throws IOException {
+    static void main(String[] args) throws Exception {
         if (args.length > 0) {
-            System.out.println("Interactive mode: TODO");
+            interactiveMode();
             return;
         }
         generateTickets();
+    }
+
+    private static void interactiveMode() throws Exception {
+        var parser = new SimplePickParser();
+        var path = Path.of("players.txt");
+        var loader = new FileLotteryLoader(parser, path);
+        var service = new LotteryAppService(loader, parser);
+        try(var controller = new IOLotteryController(System.in, System.out, service)) {
+            controller.beginInteraction();
+        }
     }
 
     private static void generateTickets() throws IOException {

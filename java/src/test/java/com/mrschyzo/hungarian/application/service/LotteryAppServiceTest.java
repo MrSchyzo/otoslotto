@@ -1,18 +1,18 @@
 package com.mrschyzo.hungarian.application.service;
 
-import com.mrschyzo.hungarian.domain.Lottery;
-import com.mrschyzo.hungarian.domain.LotteryLoader;
-import com.mrschyzo.hungarian.domain.Pick;
+import com.mrschyzo.hungarian.domain.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
 public class LotteryAppServiceTest {
+    private PickParser parser = new SimplePickParser();
+    private LotteryLoader dummyLoader = Lottery::new;
+
     @Test
     public void load_service_command_returns_success_if_no_issue_happen() {
-        LotteryLoader ok = Lottery::new;
-        LotteryAppService service = new LotteryAppService(ok);
+        LotteryAppService service = new LotteryAppService(dummyLoader, parser);
         Assertions.assertDoesNotThrow(service::load);
     }
     @Test
@@ -20,14 +20,13 @@ public class LotteryAppServiceTest {
         LotteryLoader faulty = () -> {
             throw new RuntimeException();
         };
-        LotteryAppService service = new LotteryAppService(faulty);
+        LotteryAppService service = new LotteryAppService(faulty, parser);
         Assertions.assertThrows(LotteryCannotBeLoadedException.class, service::load);
     }
     @Test
     public void query_service_command_returns_zeroed_histogram_if_it_was_not_loaded() {
-        LotteryLoader ok = Lottery::new;
-        LotteryAppService service = new LotteryAppService(ok);
-        Map<Integer, Integer> matches = service.query(new int[]{1,2,3,4,5});
+        LotteryAppService service = new LotteryAppService(dummyLoader, parser);
+        Map<Integer, Integer> matches = service.query("1 2 3 4 5");
         var expected = Map.of(
                 2, 0,
                 3, 0,
@@ -38,10 +37,9 @@ public class LotteryAppServiceTest {
     }
     @Test
     public void query_service_command_returns_zeroed_histogram_if_winning_ticket_has_not_5_elements() throws ApplicationException {
-        LotteryLoader ok = Lottery::new;
-        LotteryAppService service = new LotteryAppService(ok);
+        LotteryAppService service = new LotteryAppService(dummyLoader, parser);
         service.load();
-        Map<Integer, Integer> matches = service.query(new int[]{1,2,3,4});
+        Map<Integer, Integer> matches = service.query("1 2 3 4");
         var expected = Map.of(
                 2, 0,
                 3, 0,
@@ -52,10 +50,9 @@ public class LotteryAppServiceTest {
     }
     @Test
     public void query_service_command_returns_zeroed_histogram_if_winning_ticket_has_duplicates() throws ApplicationException {
-        LotteryLoader ok = Lottery::new;
-        LotteryAppService service = new LotteryAppService(ok);
+        LotteryAppService service = new LotteryAppService(dummyLoader, parser);
         service.load();
-        Map<Integer, Integer> matches = service.query(new int[]{1,2,2,3,4});
+        Map<Integer, Integer> matches = service.query("1 2 2 3 4");
         var expected = Map.of(
                 2, 0,
                 3, 0,
@@ -66,10 +63,9 @@ public class LotteryAppServiceTest {
     }
     @Test
     public void query_service_command_returns_zeroed_histogram_if_winning_ticket_has_invalid_values() throws ApplicationException {
-        LotteryLoader ok = Lottery::new;
-        LotteryAppService service = new LotteryAppService(ok);
+        LotteryAppService service = new LotteryAppService(dummyLoader, parser);
         service.load();
-        Map<Integer, Integer> matches = service.query(new int[]{0,1,2,3,4});
+        Map<Integer, Integer> matches = service.query("0 1 2 3 4");
         var expected = Map.of(
                 2, 0,
                 3, 0,
@@ -88,9 +84,9 @@ public class LotteryAppServiceTest {
             lottery.acceptPick(Pick.of(7,3,6,4,5));
             return lottery;
         };
-        LotteryAppService service = new LotteryAppService(ok);
+        LotteryAppService service = new LotteryAppService(ok, parser);
         service.load();
-        Map<Integer, Integer> matches = service.query(new int[]{1,2,3,4,5});
+        Map<Integer, Integer> matches = service.query("1 2 3 4 5");
         var expected = Map.of(
                 2, 0,
                 3, 1,
