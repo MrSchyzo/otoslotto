@@ -1,9 +1,6 @@
 package com.mrschyzo.hungarian.infrastructure;
 
-import com.mrschyzo.hungarian.domain.BitmaskLottery;
-import com.mrschyzo.hungarian.domain.Lottery;
-import com.mrschyzo.hungarian.domain.LotteryLoader;
-import com.mrschyzo.hungarian.domain.PickParser;
+import com.mrschyzo.hungarian.domain.*;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,7 +15,7 @@ public class FileLotteryLoader implements LotteryLoader {
     }
 
     public Lottery load() {
-        var lottery = new BitmaskLottery();
+        var lottery = new BitmaskLottery(10_000_000);
         try(var lines = Files.lines(path)) {
             lines.forEach(x -> parseAndAccept(x, lottery));
             return lottery;
@@ -27,7 +24,7 @@ public class FileLotteryLoader implements LotteryLoader {
         }
     }
 
-    private void parseAndAccept(String rawPick, BitmaskLottery lottery) {
+    private void parseAndAccept(String rawPick, Lottery lottery) {
         try {
             lottery.acceptPick(parser.parse(rawPick));
         } catch (Exception _) {}

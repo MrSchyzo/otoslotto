@@ -37,4 +37,9 @@ public class PickTest {
         var pick2 = Pick.of(14, 25, 64, 1, 90);
         Assertions.assertArrayEquals(pick.toBitmask(), pick2.toBitmask());
     }
+    @Test
+    public void returns_raw_data_from_pick() {
+        var pick = Pick.of(1, 14, 25, 64, 90);
+        Assertions.assertArrayEquals(new int[] {1,14,25,64,90}, pick.getRawData());
+    }
 }

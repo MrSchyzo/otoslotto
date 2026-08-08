@@ -11,6 +11,11 @@ public class BitmaskLottery implements Lottery {
         pickBitMasks = new int[3];
     }
 
+    public BitmaskLottery(int capacity){
+        count = 0;
+        pickBitMasks = new int[3 * capacity];
+    }
+
     @Override
     public void acceptPick(Pick pick) {
         var bitmask = pick.toBitmask();
@@ -25,7 +30,7 @@ public class BitmaskLottery implements Lottery {
     public Histogram getWinnersHistogram(Pick winningOne) {
         var matchHistogram = new int[]{0,0,0,0,0,0};
         var referenceMask = winningOne.toBitmask();
-        for (int i = 0; i < pickBitMasks.length; i += 3) {
+        for (int i = 0; i < count * 3; i += 3) {
             var hitCount =
                     Integer.bitCount(pickBitMasks[i] & referenceMask[0]) +
                     Integer.bitCount(pickBitMasks[i+1] & referenceMask[1]) +

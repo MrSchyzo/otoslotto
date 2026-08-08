@@ -31,4 +31,8 @@ public class Pick {
         }
         return new Pick(new int[]{value1, value2, value3, value4, value5});
     }
+
+    public int[] getRawData() {
+        return picks.clone();
+    }
 }

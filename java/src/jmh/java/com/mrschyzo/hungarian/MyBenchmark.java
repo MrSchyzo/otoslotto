@@ -1,7 +1,9 @@
 package com.mrschyzo.hungarian;
 
 import com.mrschyzo.hungarian.domain.BitmaskLottery;
+import com.mrschyzo.hungarian.domain.Lottery;
 import com.mrschyzo.hungarian.domain.Pick;
+import com.mrschyzo.hungarian.domain.TransposedBitmaskLottery;
 import org.openjdk.jmh.annotations.*;
 
 import java.util.HashSet;
@@ -12,7 +14,8 @@ import java.util.concurrent.TimeUnit;
 @BenchmarkMode(Mode.SampleTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 public class MyBenchmark {
-    private BitmaskLottery lottery = new BitmaskLottery();
+    private Lottery lottery = new TransposedBitmaskLottery(10_000_000);
+    //private Lottery lottery = new BitmaskLottery(10_000_000);
     private Pick pick = Pick.of(1, 2, 3, 4, 5);
     private Random random = new Random();
 
