@@ -19,6 +19,22 @@ java {
     }
 }
 
+tasks.withType<JavaCompile>().configureEach {
+    options.compilerArgs.add("--add-modules=jdk.incubator.vector")
+}
+
+tasks.withType<Test>().configureEach {
+    jvmArgs("--add-modules=jdk.incubator.vector")
+}
+
+tasks.withType<JavaExec>().configureEach {
+    jvmArgs("--add-modules=jdk.incubator.vector")
+}
+
+jmh {
+    jvmArgs.add("--add-modules=jdk.incubator.vector")
+}
+
 tasks.test {
     maxHeapSize = "2g"
 

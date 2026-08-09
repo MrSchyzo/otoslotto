@@ -37,10 +37,11 @@ public class IOLotteryController implements AutoCloseable {
                 }
                 var startQuery = System.nanoTime();
                 var result = service.query(line);
+                var endQuery = System.nanoTime();
                 out.println(
                         String.format(
                                 "[%f ms] 2-matches: %d; 3-matches: %d, 4-matches: %d, 5-matches: %d",
-                                Double.valueOf(System.nanoTime() - startQuery) / 1_000_000.0,
+                                Double.valueOf(endQuery - startQuery) / 1_000_000.0,
                                 result.get(2),
                                 result.get(3),
                                 result.get(4),

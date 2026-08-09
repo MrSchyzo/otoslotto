@@ -15,7 +15,7 @@ public class FileLotteryLoader implements LotteryLoader {
     }
 
     public Lottery load() {
-        var lottery = new BitmaskLottery(10_000_000);
+        var lottery = new VectorisedTransposedBitmaskLottery(10_000_000);
         try(var lines = Files.lines(path)) {
             lines.forEach(x -> parseAndAccept(x, lottery));
             return lottery;

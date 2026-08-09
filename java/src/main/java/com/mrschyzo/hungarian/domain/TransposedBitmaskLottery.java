@@ -52,8 +52,6 @@ public class TransposedBitmaskLottery implements Lottery {
             long low = combinedMatchSum[0];
 
             // Popcount and f(h,m,l) tell me which tickets respect the expected amount of hits represented by a binary combination
-            matchHistogram[0] += Long.bitCount(~high & ~mid & ~low);
-            matchHistogram[1] += Long.bitCount(~high & ~mid &  low);
             matchHistogram[2] += Long.bitCount(  mid & ~low);
             matchHistogram[3] += Long.bitCount(mid &  low);
             matchHistogram[4] += Long.bitCount( high & ~low);

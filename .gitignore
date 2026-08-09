@@ -1,7 +1,5 @@
 .serena
 .idea
-gradlew*
 .gradle
-gradle
 java/players.txt
 build
