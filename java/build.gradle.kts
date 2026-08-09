@@ -3,7 +3,12 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
     java
+    application
     id("me.champeau.jmh") version "0.7.3"
+}
+
+application {
+    mainClass = "com.mrschyzo.hungarian.App"
 }
 
 group = "com.mrschyzo"
@@ -29,6 +34,10 @@ tasks.withType<Test>().configureEach {
 
 tasks.withType<JavaExec>().configureEach {
     jvmArgs("--add-modules=jdk.incubator.vector")
+}
+
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
 }
 
 jmh {

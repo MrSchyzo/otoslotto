@@ -3,3 +3,4 @@
 .gradle
 java/players.txt
 build
+.vscode

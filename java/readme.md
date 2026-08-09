@@ -21,5 +21,5 @@ Just Java 17.
 3. Benchmark the app `./gradlew jmh`
 
 ### After app is built
-1. Generate a sample 10M file in the current working directory: `java -cp build/classes/java/main com.mrschyzo.hungarian.App`
-2. Run the application: `java --add-modules=jdk.incubator.vector -cp build/classes/java/main com.mrschyzo.hungarian.App exec`
+1. Generate a sample 10M file in the current working directory: `./gradlew run`
+2. Run the application: `./gradlew run --args="exec"`

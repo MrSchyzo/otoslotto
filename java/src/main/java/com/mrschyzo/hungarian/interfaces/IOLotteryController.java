@@ -17,6 +17,7 @@ public class IOLotteryController implements AutoCloseable {
     }
 
     public void beginInteraction() {
+        out.print("Loading the file..."); out.flush();
         long start = System.nanoTime();
         boolean keepRunning = true;
         try {
@@ -25,7 +26,15 @@ public class IOLotteryController implements AutoCloseable {
             out.println(String.format("Failed to load: %s", e));
             return;
         }
+        out.println(String.format("LOADED (%d ns)", System.nanoTime() - start));
+
+        out.print("Warming up the app..."); out.flush();
+        start = System.nanoTime();
+        for (int i = 0; i < 2_000; i++) {
+            service.query("10 20 30 40 50");
+        }
         out.println(String.format("READY (%d ns)", System.nanoTime() - start));
+
         while (keepRunning) {
             out.print("Name a winning draw (format \"n1 n2 n3 n4 n5\"): ");
             out.flush();
