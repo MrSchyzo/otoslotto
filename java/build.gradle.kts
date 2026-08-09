@@ -24,6 +24,11 @@ tasks.test {
 
     useJUnitPlatform()
 
+    reports {
+        html.required.set(true)
+        junitXml.required.set(true)
+    }
+
     testLogging {
         events(TestLogEvent.FAILED, TestLogEvent.STANDARD_ERROR, TestLogEvent.STANDARD_OUT, TestLogEvent.PASSED)
         exceptionFormat = TestExceptionFormat.FULL
