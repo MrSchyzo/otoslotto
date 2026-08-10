@@ -2,5 +2,6 @@
 .idea
 .gradle
 java/players.txt
+java/profiling-results
 build
 .vscode
