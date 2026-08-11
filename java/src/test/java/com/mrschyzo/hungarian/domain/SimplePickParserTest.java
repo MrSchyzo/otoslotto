@@ -1,47 +1,11 @@
 package com.mrschyzo.hungarian.domain;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import com.mrschyzo.hungarian.domain.pick.PickParser;
+import com.mrschyzo.hungarian.domain.pick.SimplePickParser;
 
-public class SimplePickParserTest {
-    @Test
-    public void pick_is_correctly_parsed_from_string_with_no_newline() {
-        SimplePickParser parser = new SimplePickParser();
-        var result = parser.parse("1 2 3 4 5");
-        var expected = Pick.of(1, 2, 3, 4, 5);
-        Assertions.assertArrayEquals(expected.toBitmask(), result.toBitmask());
-    }
-    @Test
-    public void pick_is_correctly_parsed_even_when_spaces_are_more() {
-        SimplePickParser parser = new SimplePickParser();
-        var result = parser.parse("1  2 3   4 5");
-        var expected = Pick.of(1, 2, 3, 4, 5);
-        Assertions.assertArrayEquals(expected.toBitmask(), result.toBitmask());
-    }
-    @Test
-    public void pick_parser_ignores_number_after_the_fifth_one() {
-        SimplePickParser parser = new SimplePickParser();
-        var result = parser.parse("1  2 3   4 5 600 ");
-        var expected = Pick.of(1, 2, 3, 4, 5);
-        Assertions.assertArrayEquals(expected.toBitmask(), result.toBitmask());
-    }
-    @Test
-    public void pick_parser_fails_if_there_arent_at_least_5_numbers() {
-        SimplePickParser parser = new SimplePickParser();
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parse("1 2 3 4"));
-    }
-    @Test
-    public void pick_parser_ignores_strings_that_are_not_numbers() {
-        SimplePickParser parser = new SimplePickParser();
-        var result = parser.parse("1 s2 3s 4 5 6 7");
-        var expected = Pick.of(1, 4, 5, 6, 7);
-        Assertions.assertArrayEquals(expected.toBitmask(), result.toBitmask());
-    }
-    @Test
-    public void pick_parser_ignores_strings_that_are_not_int_strings() {
-        SimplePickParser parser = new SimplePickParser();
-        var result = parser.parse("1 2.3 3.3 4 5 6 7");
-        var expected = Pick.of(1, 4, 5, 6, 7);
-        Assertions.assertArrayEquals(expected.toBitmask(), result.toBitmask());
+public class SimplePickParserTest extends PickParserTest {
+    @Override
+    protected PickParser getInstance() {
+        return new SimplePickParser();
     }
 }

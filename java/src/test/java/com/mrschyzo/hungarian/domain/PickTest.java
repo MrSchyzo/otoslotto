@@ -1,5 +1,6 @@
 package com.mrschyzo.hungarian.domain;
 
+import com.mrschyzo.hungarian.domain.pick.Pick;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -42,6 +42,7 @@ tasks.named<JavaExec>("run") {
 
 jmh {
     jvmArgs.add("--add-modules=jdk.incubator.vector")
+    jvmArgs.add("-XX:StartFlightRecording=filename=./profiling-results/app.jfr,settings=profile,maxsize=50M,maxage=30m,dumponexit=true")
 }
 
 tasks.test {

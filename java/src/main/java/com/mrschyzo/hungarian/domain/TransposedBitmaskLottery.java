@@ -1,5 +1,7 @@
 package com.mrschyzo.hungarian.domain;
 
+import com.mrschyzo.hungarian.domain.pick.Pick;
+
 import java.util.Arrays;
 
 public class TransposedBitmaskLottery implements Lottery {

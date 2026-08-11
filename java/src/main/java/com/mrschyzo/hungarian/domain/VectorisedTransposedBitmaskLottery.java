@@ -1,5 +1,6 @@
 package com.mrschyzo.hungarian.domain;
 
+import com.mrschyzo.hungarian.domain.pick.Pick;
 import jdk.incubator.vector.LongVector;
 import jdk.incubator.vector.VectorSpecies;
 

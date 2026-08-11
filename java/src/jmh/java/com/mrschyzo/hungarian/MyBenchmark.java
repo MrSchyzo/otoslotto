@@ -1,6 +1,7 @@
 package com.mrschyzo.hungarian;
 
 import com.mrschyzo.hungarian.domain.*;
+import com.mrschyzo.hungarian.domain.pick.Pick;
 import org.openjdk.jmh.annotations.*;
 
 import java.util.HashSet;

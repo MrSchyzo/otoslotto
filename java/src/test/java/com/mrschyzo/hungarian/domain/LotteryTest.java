@@ -1,6 +1,7 @@
 package com.mrschyzo.hungarian.domain;
 
 import com.mrschyzo.hungarian.domain.Lottery.Histogram;
+import com.mrschyzo.hungarian.domain.pick.Pick;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

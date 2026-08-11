@@ -1,4 +1,4 @@
-package com.mrschyzo.hungarian.domain;
+package com.mrschyzo.hungarian.domain.pick;
 
 public class Pick {
     private int[] picks;
@@ -18,6 +18,20 @@ public class Pick {
 
     public static Pick of(int value1, int value2, int value3, int value4, int value5) {
         var values = new int[]{value1, value2, value3, value4, value5};
+        validate(values);
+        return new Pick(values);
+    }
+
+    void reset(int value1, int value2, int value3, int value4, int value5) {
+        picks[0] =  value1;
+        picks[1] =  value2;
+        picks[2] =  value3;
+        picks[3] =  value4;
+        picks[4] =  value5;
+        validate(picks);
+    }
+
+    static void validate(int[] values) {
         for(int i = 0; i < values.length; i++) {
             var current = values[i];
             if (current < 1 || current > 90)
@@ -29,7 +43,6 @@ public class Pick {
                 }
             }
         }
-        return new Pick(new int[]{value1, value2, value3, value4, value5});
     }
 
     public int[] getRawData() {

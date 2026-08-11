@@ -1,5 +1,7 @@
 package com.mrschyzo.hungarian.domain;
 
+import com.mrschyzo.hungarian.domain.pick.Pick;
+
 public interface Lottery {
     void acceptPick(Pick pick);
 

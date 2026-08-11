@@ -1,8 +1,8 @@
 package com.mrschyzo.hungarian.infrastructure;
 
 import com.mrschyzo.hungarian.domain.Lottery;
-import com.mrschyzo.hungarian.domain.Pick;
-import com.mrschyzo.hungarian.domain.SimplePickParser;
+import com.mrschyzo.hungarian.domain.pick.Pick;
+import com.mrschyzo.hungarian.domain.pick.SimplePickParser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

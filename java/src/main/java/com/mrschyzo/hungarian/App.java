@@ -1,7 +1,7 @@
 package com.mrschyzo.hungarian;
 
 import com.mrschyzo.hungarian.application.service.LotteryAppService;
-import com.mrschyzo.hungarian.domain.SimplePickParser;
+import com.mrschyzo.hungarian.domain.pick.SimplePickParser;
 import com.mrschyzo.hungarian.infrastructure.FileLotteryLoader;
 import com.mrschyzo.hungarian.interfaces.IOLotteryController;
 
